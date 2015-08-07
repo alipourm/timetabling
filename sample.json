@@ -1,0 +1,64 @@
+{
+    "JobName": "SST1",
+    "JobTime":[
+        ["Sunday", 8, 17, 1],
+        ["Monday", 8, 17, 1],
+        ["Tuesday", 8, 17, 1],
+        ["Wednesday", 8, 17, 1],
+        ["Thursday", 8, 17, 1],
+        ["Friday", 8, 17, 1]
+        ],
+
+    "workers": [
+        {
+            "name": "A",
+            "availability": [
+                ["Sunday", 8, 17, 1],
+                ["Monday", 8, 17, 1],
+                ["Tuesday", 8, 17, 1],
+                ["Wednesday", 8, 17, 1],
+                ["Thursday", 8, 17, 1],
+                ["Friday", 8, 17, 1]
+            ],
+            "preference": [],
+            "senior": 0,
+            "maxtime": 20,
+            "mintime": 10
+
+        },
+   {
+            "name": "B",
+            "availability": [
+                ["Sunday", 8, 17, 1],
+                ["Monday", 8, 17, 1],
+                ["Tuesday", 8, 17, 1],
+                ["Wednesday", 8, 17, 1],
+                ["Thursday", 8, 17, 1],
+                ["Friday", 8, 17, 1]
+            ],
+            "preference": [],
+            "senior": 0,
+            "maxtime": 20,
+            "mintime": 10
+
+        },
+       {
+            "name": "C",
+            "availability": [
+                ["Sunday", 8, 17, 1],
+                ["Monday", 8, 17, 1],
+                ["Tuesday", 8, 17, 1],
+                ["Wednesday", 8, 17, 1],
+                ["Thursday", 8, 17, 1],
+                ["Friday", 8, 17, 1]
+            ],
+            "preference": [],
+            "senior": 0,
+            "maxtime": 20,
+            "mintime": 10
+
+        }
+        ]
+
+
+}

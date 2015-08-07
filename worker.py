@@ -18,7 +18,8 @@ class Worker:
         self.scheduled_hours = 0
 
 
-        self.availablity = IntervalTree()
+        self.availablity = {}
+
         self.prefered_availablity = IntervalTree()
         for (w, (start, finish)) in weighted_preference:
             self.availablity[start:finish] = (start, finish)
@@ -84,13 +85,14 @@ class Worker:
 
 class Job:
     generated = 0
-    def __init__(self, name, start, end, priority):
+    def __init__(self, name, day, start, end, priority):
         """
         :param name:
         :param required_time_slots:
         :param priority: some jobs can be optional
         :return:
         """
+        self.day = day
         self.name = name
         Job.generated += 1
         self.id = Job.generated
@@ -99,13 +101,17 @@ class Job:
         self.priority = priority
 
     def conflict(self, other):
-        objs =[self, other]
+        objs = [self, other]
+        if self.day != other.day:
+            return False
         for o1 in objs:
             for o2 in objs:
                 if o1 != o2:
                     if o1.start <= o2.start <= o1.end or o1.start <= o2.end <= o1.end:
                         return True
         return False
+
+
     #
     # def assign_worker(self, time_slot, worker):
     #     if time_slot in self.timetable:
