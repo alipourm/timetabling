@@ -6,7 +6,7 @@ TIME_SLOT_LEN = 1
 
 class Worker:
     generated = 0
-    def __init__(self, name, max_hour, weighted_preference, seniority):
+    def __init__(self, name,  availability, prefered_time, seniority, max_hour, min_hour):
         """
         :param name:
         :param max_hour:
@@ -16,33 +16,26 @@ class Worker:
         self.name = name
         self.max_hour = max_hour
         self.scheduled_hours = 0
-
-
-        self.availablity = {}
-
-        self.prefered_availablity = IntervalTree()
-        for (w, (start, finish)) in weighted_preference:
-            self.availablity[start:finish] = (start, finish)
-            if w > 1:
-                self.prefered_availablity[start:finish] = (start, finish)
-
+        self.availablity = availability
+        self.prefered_availablity = prefered_time
         self.satisfaction = 0
         self.schedule = []
         self.seniority = seniority
         Worker.generated += 1
+        self.min_hour = min_hour
         self.id = Worker.generated
 
-    def is_available(self, start, end):
-        if self.availablity[start:end]:
-            return True
-        else:
-            return False
+    def is_available(self, day, start, end):
+        for i in self.availablity[start:end]:
+            if day == i.data:
+                return True
+        return False
 
-    def is_prefer(self, start, end):
-        if self.prefered_availablity[start:end]:
-            return True
-        else:
-            return False
+    def is_prefered(self, day, start, end):
+        for i in self.prefered_availablity[start:end]:
+            if day == i.data:
+                return True
+        return False
 
 
 
@@ -100,7 +93,7 @@ class Job:
         self.end = end
         self.priority = priority
 
-    def conflict(self, other):
+    def conflicts(self, other):
         objs = [self, other]
         if self.day != other.day:
             return False
